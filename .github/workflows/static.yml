@@ -2,6 +2,18 @@
 name: Deploy static content to Pages
 
 on:
+  push:
+    branches: [ master ]          # 如果你的默认分支是 main 就改成 main
+    paths:
+      - 'output/**'               # crawler 更新的目录（按你仓库结构调整）
+      - 'index.html'
+      - 'assets/**'
+      - 'config/**'
+  workflow_run:
+    workflows: ["Hot News Crawler"]
+    types: [completed]
+  workflow_dispatch:
+
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
